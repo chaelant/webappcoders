@@ -1,13 +1,14 @@
 const MongoClient = require('mongodb').MongoClient;
 const settings = require('./config');
 const uuid = require('uuid/v4');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); //this may not need to be here (probably shouldn't)
 const saltRounds = 16;
 
 async function main() {
     const connection = await MongoClient.connect(settings.mongoConfig.serverUrl, {useNewUrlParser: true});
     const db = await connection.db(settings.mongoConfig.database);
 
+    //drop the databases for now so that we're not adding over and over. can remove later on.
     try {
         await db.collection('businesses').drop();
         await db.collection('reviews').drop();
@@ -51,6 +52,7 @@ async function main() {
             transactions: transactions,
             distance: 0 //this needs to be calculated
         };
+
         const addingBusiness = await businessCollection.insertOne(newBusiness);
         const addedId = await addingBusiness.insertedId;
         return await businessCollection.findOne({_id: addedId});
@@ -59,34 +61,44 @@ async function main() {
     //adds review
     exports.addReview = async (username, title, text, rating, business, image_url) => {
         const identifier = uuid();
+
+        //gets business ID to reference in document
         const businessDoc = await businessCollection.findOne({name: business});
         const business_id = businessDoc._id;
 
+        //gets ID of review writer to reference in document
         const userDoc = await userCollection.findOne({username: username});
         const userId = userDoc._id;
 
+        //when the review was written
         const now = new Date();
 
         const newReview = {
             _id: identifier,
-            userId: userId, //
+            userId: userId,
             title: title,
             text: text,
             rating: rating,
             time_created: now,
-            business: business_id, //this needs to pull the business's id from its collection
+            business: business_id,
             image_url: image_url
         };
 
         const addingReview = await reviewCollection.insertOne(newReview);
         const addedId = await addingReview.insertedId;
+
+        //update review_count of business
+        let reviewCount = businessDoc.review_count;
+        reviewCount++;
+        await businessCollection.updateOne({_id: business_id}, {$set: {'review_count': reviewCount}});
+
         return await reviewCollection.findOne({_id: addedId});
     };
 
     //adds user
     exports.addUser = async (plainpwd, username, image_url) => {
         const identifier = uuid();
-        const hashedPassword = await bcrypt.hash(plainpwd, saltRounds);
+        const hashedPassword = await bcrypt.hash(plainpwd, saltRounds); //should add hashed password, not plaintext password
         const newUser = {
             _id: identifier,
             hashedPassword: hashedPassword,
@@ -99,7 +111,7 @@ async function main() {
         return await userCollection.findOne({_id: addedId});
     };
 
-    exports = module.exports = businessCollection;
+    exports = module.exports;
 }
 
 main().catch(error => {
