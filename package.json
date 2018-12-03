@@ -1,0 +1,25 @@
+{
+  "name": "webappcoders",
+  "version": "1.0.0",
+  "description": "Final Project for CS-546",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelramos92/webappcoders.git"
+  },
+  "author": "Alan Lobo, Michael Ramos, David Sevilla, Gaurang Patel, Justin Glazier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michaelramos92/webappcoders/issues"
+  },
+  "homepage": "https://github.com/michaelramos92/webappcoders#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0"
+  }
+}
