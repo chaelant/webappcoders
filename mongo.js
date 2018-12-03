@@ -34,6 +34,30 @@ async function main() {
         return await userCollection.find().toArray();
     };
 
+    exports.addBusiness = async (business) => {
+      //the business object will be from the yelp api and we'll add that to the db
+        const newBusiness = {
+            _id: uuid(),
+            rating: business.rating, //this gets updated with each added review
+            price: business.price,
+            phone: business.phone,
+            alias: business.alias,
+            is_closed: business.is_closed,
+            categories: business.categories,
+            review_count: business.review_count, //this gets updated with each added review
+            name: business.name,
+            coordinates: business.coordinates,
+            image_url: business.image_url,
+            location: business.location,
+            transactions: business.transactions,
+            distance: business.distance //dependent on user location
+        };
+
+        const addingBusiness = await businessCollection.insertOne(newBusiness);
+        const addedId = await addingBusiness.insertedId;
+        return await businessCollection.findOne({_id: addedId});
+    };
+    /*
     //adds business
     exports.addBusiness = async (price, phone, is_closed, categories, name, coordinates, image_url, location, transactions) => {
         const identifier = uuid();
@@ -58,6 +82,7 @@ async function main() {
         const addedId = await addingBusiness.insertedId;
         return await businessCollection.findOne({_id: addedId});
     };
+    */
 
     //adds review
     exports.addReview = async (username, title, text, rating, business, image_url) => {
