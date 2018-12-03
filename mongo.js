@@ -9,6 +9,7 @@ async function main() {
     const db = await connection.db(settings.mongoConfig.database);
 
     //drop the databases for now so that we're not adding over and over. can remove later on.
+    /*
     try {
         await db.collection('businesses').drop();
         await db.collection('reviews').drop();
@@ -16,7 +17,7 @@ async function main() {
     } catch (e) {
 
     }
-
+    */
     const businessCollection = db.collection('businesses');
     const reviewCollection = db.collection('reviews');
     const userCollection = db.collection('users');
