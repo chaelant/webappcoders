@@ -1,3 +1,7 @@
+//the functions in this file are going to be migrated to scripts in ./data
+//much like businesses.js
+//so that it's cleaner and more modular
+
 const MongoClient = require('mongodb').MongoClient;
 const settings = require('./config');
 const uuid = require('uuid/v4');

@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const dbOps = require('../mongo');
+const data = require('../data/');
+const businesses = data.businesses;
 
 router.get('/', async(req, res) => {
     try {
-        const allBusinesses = await dbOps.getAllBusinesses();
+        const allBusinesses = await businesses.getAllBusinesses();
         res.json(allBusinesses);
     } catch (e) {
         res.sendStatus(500);
