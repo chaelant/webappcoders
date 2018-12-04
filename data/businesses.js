@@ -46,11 +46,6 @@ let exportedMethods = {
                     return this.getBusinessById(newId);
                 });
         });
-    },
-    addBusinessList(businessList) {
-        for (let b in businessList) {
-            this.addBusiness(businessList[b]);
-        }
     }
 };
 
