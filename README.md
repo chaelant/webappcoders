@@ -1,5 +1,5 @@
 # webappcoders
-# The Best application to help people lookup restaurants, dentists, hair stylists, mechanics etc.
+The Best application to help people lookup restaurants, dentists, hair stylists, mechanics etc.
 
 # Core Functionality:
 -	 List businesses based on certain search criteria in the web landing page.
