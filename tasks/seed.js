@@ -20,9 +20,9 @@ const searchRequest = [
 ];
 
 
-//right now this only seeds businesses
-//next is to seed reviews
-//idk about users
+//this seeds businesses
+//i can't seed reviews because i can't seed users since you can't get that
+//through the yelp api
 async function main() {
 
     const db = await dbConnection();

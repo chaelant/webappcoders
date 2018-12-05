@@ -1,3 +1,5 @@
 module.exports = {
-    businesses: require('./businesses')
+    businesses: require('./businesses'),
+    reviews: require('./reviews'),
+    users: require('./users')
 };

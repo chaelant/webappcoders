@@ -10,6 +10,7 @@ let exportedMethods = {
             return businessCollection.find({}).toArray();
         });
     },
+
     getBusinessById(id) {
         return businesses().then(businessCollection => {
             return businessCollection.findOne({ _id: id }).then(business => {
@@ -18,10 +19,12 @@ let exportedMethods = {
             })
         })
     },
+
+    //takes a business object
     addBusiness(business) {
         return businesses().then(businessCollection => {
             let newBusiness = {
-                _id: uuid(),
+                _id: uuid(), //repeatedly got duplicate key errors. will ensure that this matches in the review's businessId
                 rating: business.rating, //this gets updated with each added review
                 price: business.price,
                 phone: business.phone,
