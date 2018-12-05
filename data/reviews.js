@@ -1,3 +1,6 @@
+//methods to add:
+    //deleteReview(reviewId)
+
 const mongoCollection = require('../config/mongoCollections');
 const reviews = mongoCollection.reviews;
 const uuid = require('uuid/v4');
@@ -10,13 +13,25 @@ let exportedMethods = {
         })
     },
 
-    getReviewById(id) {
+    getReviewById(reviewId) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.findOne({_id: id}).then( review => {
+            return reviewCollection.findOne({_id: reviewId}).then( review => {
                 if(!review) throw "Review not found";
                 return review;
             })
         })
+    },
+
+    getReviewsByUserId(userId) {
+        return reviews().then(reviewCollection => {
+            return reviewCollection.find({userId: userId}).toArray();
+        });
+    },
+
+    getReviewsByBusiness(businessId) {
+        return reviews().then(reviewCollection => {
+            return reviewCollection.find({business: businessId}).toArray();
+        });
     },
 
     //takes a business object, a user object, and a review object

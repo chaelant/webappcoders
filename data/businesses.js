@@ -1,3 +1,5 @@
+//methods to add:
+    //deleteBusiness(businessId)
 const mongoCollection = require('../config/mongoCollections');
 const businesses = mongoCollection.businesses;
 const uuid = require('uuid/v4');

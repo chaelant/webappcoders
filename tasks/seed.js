@@ -17,7 +17,7 @@ const searchRequest = [
     {
         location: 'union city, nj'
     }
-];
+]; //this is the list of locations that we can seed into a database. if we want location specific businesses, we need the location from the client side
 
 
 //this seeds businesses
@@ -27,7 +27,6 @@ async function main() {
 
     const db = await dbConnection();
     await db.dropDatabase();
-
 
     //may be able to use Promise.all() here for many location requests
     for (let s in searchRequest) {

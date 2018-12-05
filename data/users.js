@@ -1,3 +1,6 @@
+//methods to add:
+    //deleteUser(userId)
+
 const mongoCollection = require('../config/mongoCollections');
 const users = mongoCollection.users;
 const uuid = require('uuid/v4');
