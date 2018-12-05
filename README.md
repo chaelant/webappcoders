@@ -15,32 +15,39 @@ The Best application to help people lookup restaurants, dentists, hair stylists,
 -	Message the business.
 
 # Database Definition
-Gaurang Patel Justin Glazier David Sevilla Michael Ramos Alan Lobo
 ##Business
 This collection will store all the business details. This data will be used during search and also for when viewing business details.
+```
 {
-"id": "E8RJkjfdcwgtyoPMjQ_Olg", "rating": 4,
-"price": "$",
-"phone": "+14152520800",
-"alias": "four-barrel-coffee-san-francisco", "is_closed": false,
-"categories": [
-{
-"alias": "coffee",
-"title": "Coffee & Tea" }
-],
-"review_count": 1738, "name": "Four Barrel Coffee", "coordinates": {
-"latitude": 37.7670169511878,
-"longitude": -122.42184275 },
-"image_url": "http://s3-media2.fl.yelpcdn.com/bphoto/MmgtASP3l_t4tPCL1iAsCg/o.jpg", "location": {
-"city": "San Francisco", "country": "US",
-"address2": "",
-"address3": "",
-"state": "CA",
-"address1": "375 Valencia St", "zip_code": "94103"
-},
-"transactions": ["pickup", "delivery"], "distance":100
-
+  "id": "E8RJkjfdcwgtyoPMjQ_Olg", "rating": 4,
+  "price": "$",
+  "phone": "+14152520800",
+  "alias": "four-barrel-coffee-san-francisco", "is_closed": false,
+  "categories": [
+    {
+      "alias": "coffee",
+      "title": "Coffee & Tea" 
+     }
+  ],
+  "review_count": 1738, "name": "Four Barrel Coffee", 
+  "coordinates": {
+    "latitude": 37.7670169511878,
+    "longitude": -122.42184275 
+  },
+  "image_url": "http://s3-media2.fl.yelpcdn.com/bphoto/MmgtASP3l_t4tPCL1iAsCg/o.jpg", 
+  "location": {
+    "address1": "375 Valencia St", 
+    "address2": "",
+    "address3": "",
+    "city": "San Francisco", 
+    "country": "US",
+    "state": "CA",
+    "zip_code": "94103"
+  },
+  "transactions": ["pickup", "delivery"], 
+  "distance":100
 }
+```
 | Name | Type | Description |
 |------|------|-------------|
 | id | string | A globally unique identifier to represent the user |
@@ -60,9 +67,12 @@ This collection will store all the business details. This data will be used duri
 The user collection will store all users information inclusing profiles. Users will be able to login, update their profile, and post reviews.
 ```
 {
-"_id":"7b7997a2-c0d2-4f8c-b27a-6a1d4b5b6310", "sessionId":"b3988882-627f-4c59-8d5d-54b7a43b030e",
-"hashedPassword":"$2a$08$XdvNkfdNIL8Fq7l8xsuIUeSbNOFgK0M0iV5HOskfVn7.PWncShU.O", "name":"John doe",
-"image_url":"image_url" }
+  "_id":"7b7997a2-c0d2-4f8c-b27a-6a1d4b5b6310", 
+  "sessionId":"b3988882-627f-4c59-8d5d-54b7a43b030e",
+  "hashedPassword":"$2a$08$XdvNkfdNIL8Fq7l8xsuIUeSbNOFgK0M0iV5HOskfVn7.PWncShU.O", 
+  "name":"John doe",
+  "image_url":"image_url" 
+}
 ```
 | Name | Type | Description |
 |------|------|-------------|
@@ -72,17 +82,27 @@ The user collection will store all users information inclusing profiles. Users w
 
 ## Reviews
 The reviews collection will store all the reviews that are created.
+```
 {
-"_id":"5a5c4461-cdc9-4144-84f9-fcb278c5c122", "userId":"c5d0fd67-7977-4fc5-9088-33d0347c932b"
-"title":"Implement AmericaWorks",
-"text": ""Went back again to this place since the last time i visited the bay area 5 months ago,
+  "_id":"5a5c4461-cdc9-4144-84f9-fcb278c5c122", 
+  "userId":"c5d0fd67-7977-4fc5-9088-33d0347c932b"
+  "title":"Implement AmericaWorks",
+  "text": ""Went back again to this place since the last time i visited the bay area 5 months ago,
 and nothing has changed.",
-"rating":4,
-"time_created": "2016-08-29 00:41:13", "business":"E8RJkjfdcwgtyoPMjQ_Olg", "imageurl":"imageurl"
-} ```
-| Name | Type | Description | |------|------|-------------|
+  "rating":4,
+  "time_created": "2016-08-29 00:41:13", 
+  "business":"E8RJkjfdcwgtyoPMjQ_Olg", 
+  "imageurl":"imageurl"
+} 
+```
+
+| Name | Type | Description | 
+|------|------|-------------|
 | _id | string | The task ID. |
-| user| the user whom has created the review. | |title| string | The review title |
+| user| the user whom has created the review. | 
+|title| string | The review title |
 |text| string | Text excerpt of this review. |
 |rating| int | Rating of this review. |
-|time_created| string | The time that the review was created in EST. | |business| string | The business associated with the review| |imageurl| string | optional, if user wants to upload an image |
+|time_created| string | The time that the review was created in EST. | 
+|business| string | The business associated with the review| 
+|imageurl| string | optional, if user wants to upload an image |
