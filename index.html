@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script lang="js">
+        function displayLocationInfo(position) {
+            const lng = position.coords.longitude;
+            const lat = position.coords.latitude;
+
+            console.log(`latitude: ${lat} | longitude ${lng}`);
+        }
+
+        if (navigator.geolocation) {
+            console.log('location available');
+            navigator.geolocation.getCurrentPosition(displayLocationInfo);
+        } else {
+            console.log('forbidden')
+        }
+    </script>
+</body>
+</html>
