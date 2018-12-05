@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6469c425-5173-4005-b68a-a61609eac16f" name="Default Changelist" comment="added user and review routes and methods">
+    <list default="true" id="6469c425-5173-4005-b68a-a61609eac16f" name="Default Changelist" comment="comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/businesses.js" beforeDir="false" afterPath="$PROJECT_DIR$/data/businesses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/data/reviews.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/seed.js" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/seed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -61,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="64">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -105,7 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="607" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
@@ -197,7 +194,7 @@
       <workItem from="1543828618728" duration="481000" />
       <workItem from="1543830808459" duration="101000" />
       <workItem from="1543892847849" duration="18000" />
-      <workItem from="1543900445214" duration="27667000" />
+      <workItem from="1543900445214" duration="28247000" />
     </task>
     <task id="LOCAL-00001" summary="commented out">
       <created>1543205374317</created>
@@ -241,20 +238,34 @@
       <option name="project" value="LOCAL" />
       <updated>1543987128943</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="comments">
+      <created>1543994083093</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1543994083093</updated>
+    </task>
+    <task id="LOCAL-00008" summary="comments">
+      <created>1543994219261</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1543994219261</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36372000" />
+    <option name="totallyTimeSpent" value="36952000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="607" y="23" width="1440" height="823" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="823" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.10729614" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32867134" />
+      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.32867134" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32867134" />
@@ -264,7 +275,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32867134" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.33286715" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.33286715" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -342,7 +353,8 @@
     <MESSAGE value="display db on route /db" />
     <MESSAGE value="reworked database seeding for businesses" />
     <MESSAGE value="added user and review routes and methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="added user and review routes and methods" />
+    <MESSAGE value="comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="comments" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.js">
@@ -488,8 +500,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        <state relative-caret-position="64">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
