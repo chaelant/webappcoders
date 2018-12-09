@@ -1,0 +1,42 @@
+<article class="new-post">
+  <div class="header">
+    <h2>Login for Review App</h2>
+    <p class="subheading">Connect with great local businesses</p>
+  </div>
+  <form action="/users/login" method="POST" class="new-post-form">
+    <input type="hidden" name="csrftok">
+    <div class="js-password-meter-container" data-component-bound="true">
+      <input id="username" name="username" placeholder="login id" required="required" type="text" value="">
+      <input id="password" name="password" placeholder="Password" required="required" type="text" value="">
+      <div class="js-password-meter-wrapper password-meter-wrapper u-hidden">
+
+        <div class="progress-bar-container--minimal">
+          <h4 class="progress-bar-text">
+          </h4>
+          <div class="progress-bar new js-progress-bar">
+            <div class="progress-bar_fill js-progress-bar_fill new" role="presentation" style="width: 0%"></div>
+          </div>
+        </div>
+        {{!-- <div class="js-password-meter-help-block help-block u-space-b2">Password must be at least 6 characters in
+          length</div>
+        <input type="hidden" class="js-password-meter-strength-result" name="result_password_strength_meter">
+      </div> --}}
+      <input id="signup_source" name="signup_source" type="hidden" value="default">
+    </div>
+    </div>
+
+  
+    <input type="hidden" name="marketing_email_allowed" id="marketing-email-allowed" value="0">
+    <button id="signup-button" type="submit" value="Sign Up" class="ybtn ybtn--primary ybtn--big disable-on-submit submit signup-button">
+      <span>Login</span></button>
+  </form>
+  {{#if hasErrors}}
+  <ul class="error-list">
+    {{#each errors}}
+    <li>
+      {{this}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+</article>
