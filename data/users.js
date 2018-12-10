@@ -7,39 +7,33 @@ const uuid = require('uuid/v4');
 const bcrypt = require("bcrypt");
 const saltRounds = 16;
 
-let exportedMethods = {
-   async addUser(Password, username, name, image_url) {
+let exportedMethods = { async addUser(Password, username, name, image_url) {
         
-        users().then(userCollection => {
-            // let newUser = {
-            //     _id: uuid(),
-            //     sessionId: uuid(),
-            //     hashedPassword: Password,
-            //     name: name,
-            //     username: username,
-            //     image_url: image_url
-            // };
+       // users().then(userCollection => {
 
-            // const newDoc = await userCollection.insertOne(newUser);
-            // let addedUser = this.getUserById(newDoc.insertedId);
-            // return addedUser;
+           const newUser = {
+            _id: uuid(),
+            sessionId: uuid(),
+            hashedPassword: Password,
+            name: name,
+            username: username
+           };
 
-             userCollection
-                .insertOne({
-                    _id: uuid(),
-                    sessionId: uuid(),
-                    hashedPassword: Password,
-                    name: name,
-                    username: username,
-                    image_url: image_url})
-                .then(function (newDoc) {
-                    return newDoc.insertedId;
-                })
-                .then(function (newId) {
-                    let newUser = exportedMethods.getSelectedUserById(newId);
-                    return newUser;
-                });
-        })
+           const userCollection = await users();
+           const newInsertInformation = await userCollection.insertOne(newUser);
+           const newId = newInsertInformation.insertedId;
+           return await this.getSelectedUserById(newId);
+
+            // return userCollection
+            //     .insertOne({newUser})
+            //     .then(function (newDoc) {
+            //         return newDoc.insertedId;
+            //     })
+            //     .then(function (newId) {
+            //         let newUser = exportedMethods.getSelectedUserById(newId);
+            //         return newUser;
+            //     });
+        //})
     },
     async checkIfValidUser(username, password) {
         var newusers = await this.getAllUsers();
