@@ -42,7 +42,8 @@ router.post("/signup", async (req, res) => {
   const hashpassword = await bcrypt.hash(userInfo.password, saltRounds);
   let newUser = await users.addUser(hashpassword, userInfo.username, name, null);
   if(newUser) {
-    res.json(newUser);
+    //res.json(newUser);
+    res.render("users/private", { user: newUser});
   } else {
     errors.push("Either Username or password invalid");
       res.render("users/signup", { hasErrors: true,
@@ -74,9 +75,14 @@ router.post("/login", async (req, res) => {
       //valid user found
       res.render("/users/private", {
         title: "The login Results!",
-        user
-      });
-    } 
+        user});
+    } else {
+      errors.push("Either Username or password invalid");
+      res.render("users/login", 
+      { post: post,
+        hasErrors: true,
+        errors: errors});
+    }
 });
 
 router.delete("/:id", (req, res) => {
