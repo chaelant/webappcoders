@@ -1,6 +1,6 @@
 const dbRoutes = require('./db');
 const reviewRoutes = require('./reviews');
-const userRoutes = require('./users');
+const userRoutes = require('./signuplogin');
 //const detailRoutes = require('./detail');
 
 const constructorMethod = app => {
