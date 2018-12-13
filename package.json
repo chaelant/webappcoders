@@ -19,13 +19,13 @@
   },
   "homepage": "https://github.com/michaelramos92/webappcoders#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "mongodb": "^2.2.19",
     "nodemon": "^1.18.7",
-    "yelp-fusion": "^2.2.1",
     "uuid": "^3.3.2",
-    "bcrypt": "^3.0.2"
+    "yelp-fusion": "^2.2.1"
   }
 }

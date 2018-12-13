@@ -6,16 +6,28 @@ const getReviewsByBusiness = data.reviews.getReviewsByBusiness;
 const getUserById = data.users.getUserById;
 
 
-router.get('/', async(req, res) => {
-    const entity = req.body;
+router.get('/:id', async(req, res) => {
+    const entity = req.params.id;
+    let business;
+    let reviews;
+    //let user;
     try {
-        await getBusinessById(entity.business._id);
-        await getReviewsByBusiness(entity.business._id);
-        await getUserById(entity.user._id);
+        business = await getBusinessById(entity);
+        // reviews = await getReviewsByBusiness(entity);
+        // for (let rev of reviews) {
+        //     const revuser = getUserById(rev.userId);
+        //     rev["username"] = revuser.username;
+        // }
+        //user = await getUserById(entity);
     } catch (err) {
-        
+        res.status(404).render("detail/error", {error: err});
     }
 
+    try {
+        res.render("detail/detail", {business: business}); // , reviews: reviews
+    } catch (err) {
+        res.status(500).render("detail/error", {error: "There was an error on the server handling your request."})
+    }
 
 });
 

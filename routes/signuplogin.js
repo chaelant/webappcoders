@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require('../data/');
 const users = data.users;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 16;
 
 router.get("/login", (req, res) => {
