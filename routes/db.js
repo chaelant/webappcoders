@@ -6,9 +6,8 @@ const businesses = data.businesses;
 
 router.get('/', async(req, res) => {
     try {
-        res.sendFile(path.resolve('index.html'))
-        //const allBusinesses = await businesses.getAllBusinesses();
-        //res.json(allBusinesses);
+        const allBusinesses = await businesses.getAllBusinesses();
+        res.json(allBusinesses);
     } catch (e) {
         res.sendStatus(500);
     }
