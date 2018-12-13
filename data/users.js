@@ -7,8 +7,9 @@ const uuid = require('uuid/v4');
 const bcrypt = require("bcrypt");
 const saltRounds = 16;
 
-let exportedMethods = { async addUser(Password, username, name, image_url) {
-        
+let exportedMethods = {
+
+    async addUser(Password, username, name) {
        // users().then(userCollection => {
 
            const newUser = {
@@ -56,13 +57,26 @@ let exportedMethods = { async addUser(Password, username, name, image_url) {
             return userCollection.find({}).toArray();
         });
     },
+
     async getSelectedUserById(id) {
         return users().then(userCollection => {
             return userCollection.findOne({ _id: id }).then(user => {
                 if (!user) throw "User not found";
                 return user;
-            })
-        })
+            });
+        });
+    },
+
+    deleteUser(id) {
+        return users().then(userCollection => {
+            return userCollection.removeOne({ _id: id }).then(deletionInfo => {
+                if (deletionInfo.deletedCount === 0) {
+                    throw `Could not delete user with id of ${id}`
+                } else {
+
+                }
+            });
+        });
     }
 };
 

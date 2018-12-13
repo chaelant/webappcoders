@@ -6,20 +6,10 @@
     <title>Title</title>
 </head>
 <body>
-    <script lang="js">
-        function displayLocationInfo(position) {
-            const lng = position.coords.longitude;
-            const lat = position.coords.latitude;
-
-            console.log(`latitude: ${lat} | longitude ${lng}`);
-        }
-
-        if (navigator.geolocation) {
-            console.log('location available');
-            navigator.geolocation.getCurrentPosition(displayLocationInfo);
-        } else {
-            console.log('forbidden')
-        }
-    </script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="public/js/get-yelp-api.js"></script>
 </body>
 </html>
