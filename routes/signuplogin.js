@@ -6,6 +6,7 @@ const businesses = data.businesses;
 const reviews = data.reviews;
 const bcrypt = require("bcryptjs");
 const saltRounds = 16;
+let mUser = null;
 
 router.get("/login", (req, res) => {
   const post = users.getAllUsers();
@@ -43,9 +44,12 @@ router.post("/signup", async (req, res) => {
   var name = userInfo.first_name + userInfo.last_name;
   const hashpassword = await bcrypt.hash(userInfo.password, saltRounds);
   let newUser = await users.addUser(hashpassword, userInfo.username, name, null);
+  mUser = newUser;
+
   if(newUser) {
     //res.json(newUser);
-    res.render("users/private", { user: newUser});
+    var userReviews = await reviews.getReviewsByUserId(mUser._id);
+    res.render("users/private", { user: newUser, reviews:userReviews});
   } else {
     errors.push("Either Username or password invalid");
       res.render("users/signup", { hasErrors: true,
@@ -73,9 +77,12 @@ router.post("/login", async (req, res) => {
   }
 
   var newUser = await users.checkIfValidUser(userInfo.username, userInfo.password);
+  mUser = newUser;
+
     if (newUser) {
       //valid user found
-      res.render("users/private", {user: newUser});
+      var userReviews = await reviews.getReviewsByUserId(mUser._id);
+      res.render("users/private", {user: newUser, reviews: userReviews});
     } else {
       errors.push("Either Username or password invalid");
       res.render("users/login", 
@@ -104,6 +111,7 @@ router.post("/review", async (req, res) => {
 router.post("/reviewcreated", async (req, res) => {
   let userInfo = req.body;
   let errors = [];
+  let userId = mUser._id;
   if (!userInfo) {
     res.status(400).json({ error: "You must provide data to create a user" });
     return;
@@ -119,12 +127,14 @@ router.post("/reviewcreated", async (req, res) => {
     return;
   }
 
- var entry = await reviews.addReview("123456", userInfo.businessname, 
+ var entry = await reviews.addReview(userId, userInfo.businessname, 
        userInfo.newtask_description, 4, new Date().getTime, userInfo.businessid, null);
      
    if (entry) {
-    const allBusinesses = await businesses.getAllBusinesses();
-    res.render("homepage", {business: allBusinesses});
+    // const allBusinesses = await businesses.getAllBusinesses();
+    // res.render("homepage", {business: allBusinesses});
+    var userReviews = await reviews.getReviewsByUserId(mUser._id);
+    res.render("users/private", {user: mUser, reviews: userReviews});
    }    
 });
 
