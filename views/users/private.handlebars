@@ -1,10 +1,15 @@
 <article class="post">
-  <h2>Created user details:</h2>
-  <div class="success">
-    <p>Username: {{user.username}}</p>
-    <p>sessionId: {{user.sessionId}}</p>
-    <p>hashedPassword: {{user.hashedPassword}}</p>
-    <p>name: {{user.name}}</p>
-    <p>_id: {{user._id}}</p>
-  </div>
+  <h2>SignedUp user details:</h2>
+  <form action="/users/review" method="POST" class="new-post-form">
+    <div class="col-sm-12 col-md-12" id="todo-area">
+      {{!-- <p>UserId: {{user._id}}</p> --}}
+      <input id="UserId" name="UserId" type="text" value="{{user._id}}">
+      <p>Username: {{user.username}}</p>
+      <p>name: {{user.name}}</p>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <button id="write_review_button" type="submit" value="Write a review" class="ybtn ybtn--primary ybtn--big">
+       <span>Write a review</span></button>
+    </div>
+  </form>
 </article>
