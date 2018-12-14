@@ -51,6 +51,18 @@ let exportedMethods = {
                     return this.getBusinessById(newId);
                 });
         });
+    },
+
+    deleteBusiness(id) {
+        return businesses().then(businessCollection => {
+            return businessCollection.removeOne({_id: id}).then(deletionInfo => {
+                if (deletionInfo.deletedCount === 0) {
+                    throw `Could not delete business with id of ${id}`;
+                } else {
+
+                }
+            });
+        });
     }
 };
 

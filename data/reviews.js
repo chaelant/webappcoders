@@ -61,6 +61,18 @@ let exportedMethods = {
                 });
 
         });
+    },
+
+    deleteReview(id) {
+        return reviews().then(reviewCollection => {
+            return reviewCollection.removeOne({ _id: id}).then(deletionInfo => {
+                if (deletionInfo.deletedCount === 0) {
+                    throw `Could not delete review with id of ${id}`;
+                } else {
+
+                }
+            });
+        });
     }
 };
 
