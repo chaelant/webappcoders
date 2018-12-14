@@ -123,9 +123,8 @@ router.post("/reviewcreated", async (req, res) => {
        userInfo.newtask_description, 4, new Date().getTime, userInfo.businessid, null);
      
    if (entry) {
-    //res.json("users/private", {user: entry});
-    var result = "Thanks for your valuable review, review details are as follows: " +entry;
-    res.status(400).json({entry});
+    const allBusinesses = await businesses.getAllBusinesses();
+    res.render("homepage", {business: allBusinesses});
    }    
 });
 

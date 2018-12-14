@@ -7,8 +7,7 @@ const businesses = data.businesses;
 router.get('/', async(req, res) => {
     try {
         const allBusinesses = await businesses.getAllBusinesses();
-        //res.json(allBusinesses);
-        res.render("users/reviewselector", { business: allBusinesses});
+        res.render("homepage", {business: allBusinesses});
     } catch (e) {
         res.sendStatus(500);
     }
