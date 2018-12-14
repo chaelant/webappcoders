@@ -110,3 +110,11 @@ form input, form select {
 form label {
  width: 75%;
 }
+
+.businessborder {
+  border: 2px solid;
+}
+
+.detailphone {
+  color: red;
+}

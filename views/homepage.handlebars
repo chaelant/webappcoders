@@ -2,18 +2,20 @@
     <h2>Recomended Businesses:</h2>
     <article>
         {{#each business}}
-            <a href="/detail/{{_id}}">
-                <div>
-                    <p>{{name}}</p>
-                    <img src="{{image_url}}" alt="Picture of Business" height="200" width="200">
-                    <p>{{location.display_address}}</p>
-                    <p>{{rating}} Stars</p>
-                    <p>{{price}}</p>
-                    {{#each categories}}
-                        <p>{{title}}</p>
-                    {{/each}}
-                </div>
-            </a>
+            <div class="businessborder">
+                <a href="/detail/{{_id}}">
+                    <div>
+                        <p>{{name}}</p>
+                        <img src="{{image_url}}" alt="Picture of Business" height="200" width="200">
+                    </div>
+                </a>
+                <p>{{location.display_address}}</p>
+                <p>{{rating}} Stars</p>
+                <p>{{price}}</p>
+                {{#each categories}}
+                    <p>{{title}}</p>
+                {{/each}}
+            </div>
         {{/each}}
     </article>
 </section>
