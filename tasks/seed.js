@@ -64,27 +64,33 @@ async function main() {
     const db = await dbConnection();
     await db.dropDatabase();
 
+    console.log('Seeding database. This will take a few minutes.');
+
     let userIds = [];
+
+    console.log('Users...');
 
     for (let b in baseUsers) {
         const addedUser = await users.addUser(baseUsers[b].hashedPassword, baseUsers[b].username, baseUsers[b].name);
         userIds.push(addedUser._id);
-        console.log('Added', addedUser);
     }
 
-    //console.log(userIds);
     //may be able to use Promise.all() here for many location requests
+    console.log('Businesses...');
+
     for (let s in searchRequest) {
         const p = await client.search(searchRequest[s]); //get the list of businesses
         const list = p.jsonBody.businesses;
 
         for (let l in list) {
             await businesses.addBusiness(list[l]);
-            //console.log('added', list[l]);
         }
     }
 
+    console.log('Reviews...');
+
     const allBusinesses = await businesses.getAllBusinesses();
+
     let aliases = [];
 
     for (let biz in allBusinesses) {
@@ -110,7 +116,6 @@ async function main() {
             };
 
             let added = await reviews.addReviewSeed(newReview);
-            console.log(added)
         }
     }
 
@@ -121,7 +126,7 @@ async function main() {
     //let reviewCollection = await reviews.getAllReviews();
     //console.log(reviewCollection);
 
-    console.log('database seeded');
+    console.log('Database seeded!');
     db.close()
 }
 
