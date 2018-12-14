@@ -103,4 +103,14 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+//a test route to check database
+router.get('/allusers', async (req, res) => {
+  try {
+    const allUsers = await users.getAllUsers();
+    res.json(allUsers)
+  } catch (e) {
+    res.json({error: 'problem with database'})
+  }
+})
+
 module.exports = router;
