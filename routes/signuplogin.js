@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const data = require('../data/');
 const users = data.users;
-const bcrypt = require("bcrypt");
+const businesses = data.businesses;
+const reviews = data.reviews;
+const bcrypt = require("bcryptjs");
 const saltRounds = 16;
 
 router.get("/login", (req, res) => {
@@ -70,20 +72,62 @@ router.post("/login", async (req, res) => {
     return;
   }
 
-  var user = await users.checkIfValidUser(userInfo.username, userInfo.password);
-    if (user) {
+  var newUser = await users.checkIfValidUser(userInfo.username, userInfo.password);
+    if (newUser) {
       //valid user found
-      res.render("/users/private", {
-        title: "The login Results!",
-        user});
+      res.render("users/private", {user: newUser});
     } else {
       errors.push("Either Username or password invalid");
       res.render("users/login", 
-      { post: post,
-        hasErrors: true,
+      {hasErrors: true,
         errors: errors});
     }
 });
+
+router.post("/review", async (req, res) => {
+  let userInfo = req.body;
+  let errors = [];
+  if (!userInfo) {
+    res.status(400).json({ error: "You must provide data to create a user" });
+    return;
+  }
+
+  if (!userInfo.UserId) {
+    res.status(400).json({ error: "Unable to read the userId" });
+    return;
+  }
+
+  var entries = await businesses.getAllBusinesses();
+  res.render("users/reviewselector", { business: entries});
+});
+
+router.post("/reviewcreated", async (req, res) => {
+  let userInfo = req.body;
+  let errors = [];
+  if (!userInfo) {
+    res.status(400).json({ error: "You must provide data to create a user" });
+    return;
+  }
+
+  if (!userInfo.businessid) {
+    res.status(400).json({ error: "Unable to read the userId" });
+    return;
+  }
+
+  if (!userInfo.businessname) {
+    res.status(400).json({ error: "Unable to read the userId" });
+    return;
+  }
+
+ var entry = await reviews.addReview("123456", userInfo.businessname, 
+       userInfo.newtask_description, 4, new Date().getTime, userInfo.businessid, null);
+     
+   if (entry) {
+    //res.json("users/private", {user: entry});
+    res.status(400).json({entry});
+   }    
+});
+
 
 router.delete("/:id", (req, res) => {
   let user = userData
@@ -102,15 +146,5 @@ router.delete("/:id", (req, res) => {
       res.status(404).json({ error: "User not found" });
     });
 });
-
-//a test route to check database
-router.get('/allusers', async (req, res) => {
-  try {
-    const allUsers = await users.getAllUsers();
-    res.json(allUsers)
-  } catch (e) {
-    res.json({error: 'problem with database'})
-  }
-})
 
 module.exports = router;

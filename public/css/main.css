@@ -110,3 +110,8 @@ form input, form select {
 form label {
  width: 75%;
 }
+
+.divclass {
+  width: 60%;
+  box-sizing: border-box;
+}

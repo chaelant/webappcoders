@@ -1,5 +1,5 @@
 //methods to add:
-    //deleteReview(reviewId)
+//deleteReview(reviewId)
 
 const mongoCollection = require('../config/mongoCollections');
 const reviews = mongoCollection.reviews;
@@ -15,8 +15,8 @@ let exportedMethods = {
 
     getReviewById(reviewId) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.findOne({_id: reviewId}).then( review => {
-                if(!review) throw "Review not found";
+            return reviewCollection.findOne({ _id: reviewId }).then(review => {
+                if (!review) throw "Review not found";
                 return review;
             })
         })
@@ -24,13 +24,13 @@ let exportedMethods = {
 
     getReviewsByUserId(userId) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.find({userId: userId}).toArray();
+            return reviewCollection.find({ userId: userId }).toArray();
         });
     },
 
     getReviewsByBusiness(businessId) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.find({business: businessId}).toArray();
+            return reviewCollection.find({ business: businessId }).toArray();
         });
     },
 
@@ -65,13 +65,40 @@ let exportedMethods = {
 
     deleteReview(id) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.removeOne({ _id: id}).then(deletionInfo => {
+            return reviewCollection.removeOne({ _id: id }).then(deletionInfo => {
                 if (deletionInfo.deletedCount === 0) {
                     throw `Could not delete review with id of ${id}`;
                 } else {
 
                 }
             });
+        });
+    },
+    addReview(userid, title, text, rating, timecreated, businessId, imageurl) {
+        return reviews().then(reviewCollection => {
+
+            const now = new Date();
+
+            let newReview = {
+                _id: uuid(),
+                userId: userid,
+                title: title,
+                text: text,
+                rating: rating,
+                time_created: timecreated,
+                business: businessId,
+                image_url: imageurl
+            };
+
+            return reviewCollection
+                .insertOne(newReview)
+                .then(newInsertInformation => {
+                    return newInsertInformation.insertedId;
+                })
+                .then(newId => {
+                    return this.getReviewById(newId);
+                });
+
         });
     }
 };
