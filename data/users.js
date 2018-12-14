@@ -9,6 +9,18 @@ const saltRounds = 16;
 
 let exportedMethods = {
 
+    createIndex() {
+        return users().then(userCollection => {
+            userCollection.createIndex({'$**': 'text'});
+        })
+    },
+
+    getUsersBySearchTerm(searchTerm) {
+        return users().then(userCollection => {
+            return userCollection.find({$text: {$search: searchTerm}}).toArray();
+        })
+    },
+
     async addUser(Password, username, name) {
        // users().then(userCollection => {
 

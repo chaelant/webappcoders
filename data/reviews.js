@@ -1,11 +1,23 @@
 //methods to add:
-    //deleteReview(reviewId)
+//deleteReview(reviewId)
 
 const mongoCollection = require('../config/mongoCollections');
 const reviews = mongoCollection.reviews;
 const uuid = require('uuid/v4');
 
 let exportedMethods = {
+
+    createIndex() {
+        return reviews().then(reviewCollection => {
+            reviewCollection.createIndex({'$**': 'text'})
+        })
+    },
+
+    getReviewsBySearchTerm(searchTerm) {
+        return reviews().then(reviewCollection => {
+            return reviewCollection.find({$text: {$search: searchTerm}}).toArray();
+        })
+    },
 
     getAllReviews() {
         return reviews().then(reviewCollection => {
@@ -15,8 +27,8 @@ let exportedMethods = {
 
     getReviewById(reviewId) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.findOne({_id: reviewId}).then( review => {
-                if(!review) throw "Review not found";
+            return reviewCollection.findOne({ _id: reviewId }).then(review => {
+                if (!review) throw "Review not found";
                 return review;
             })
         })
@@ -24,35 +36,21 @@ let exportedMethods = {
 
     getReviewsByUserId(userId) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.find({userId: userId}).toArray();
+            return reviewCollection.find({ userId: userId }).toArray();
         });
     },
 
     getReviewsByBusiness(businessId) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.find({business: businessId}).toArray();
+            return reviewCollection.find({ business: businessId }).toArray();
         });
     },
 
-    //takes a business object, a user object, and a review object
-    addReview(business, user, review) {
+    //takes a review object
+    addReviewSeed(review) {
         return reviews().then(reviewCollection => {
-
-            const now = new Date();
-
-            let newReview = {
-                _id: uuid(),
-                userId: user._id,
-                title: review.title,
-                text: review.text,
-                rating: review.rating,
-                time_created: now,
-                business: business._id,
-                image_url: review.image_url
-            };
-
             return reviewCollection
-                .insertOne(newReview)
+                .insertOne(review)
                 .then(newInsertInformation => {
                     return newInsertInformation.insertedId;
                 })
@@ -65,13 +63,41 @@ let exportedMethods = {
 
     deleteReview(id) {
         return reviews().then(reviewCollection => {
-            return reviewCollection.removeOne({ _id: id}).then(deletionInfo => {
+            return reviewCollection.removeOne({ _id: id }).then(deletionInfo => {
                 if (deletionInfo.deletedCount === 0) {
                     throw `Could not delete review with id of ${id}`;
                 } else {
 
                 }
             });
+        });
+    },
+
+    addReview(userid, title, text, rating, timecreated, businessId, imageurl) {
+        return reviews().then(reviewCollection => {
+
+            const now = new Date();
+
+            let newReview = {
+                _id: uuid(),
+                userId: userid,
+                title: title,
+                text: text,
+                rating: rating,
+                time_created: timecreated,
+                business: businessId,
+                image_url: imageurl
+            };
+
+            return reviewCollection
+                .insertOne(newReview)
+                .then(newInsertInformation => {
+                    return newInsertInformation.insertedId;
+                })
+                .then(newId => {
+                    return this.getReviewById(newId);
+                });
+
         });
     }
 };

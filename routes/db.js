@@ -5,9 +5,11 @@ const path = require('path');
 const businesses = data.businesses;
 
 router.get('/', async(req, res) => {
+    //leverage getBusinessBySearchTerm with req.body to filter for landing page
     try {
-        const allBusinesses = await businesses.getAllBusinesses();
-        res.render("homepage", {business: allBusinesses});
+        const localBusinesses = await businesses.getBusinessesBySearchTerm('coffee');
+        //const allBusinesses = await businesses.getAllBusinesses();
+        res.render("homepage", {business: localBusinesses});
     } catch (e) {
         res.sendStatus(500);
     }
