@@ -2,6 +2,8 @@ const dbConnection = require('../config/mongoConnection');
 const data = require('../data');
 const businesses = data.businesses;
 const users = data.users;
+const reviews = data.reviews;
+const uuid = require('uuid/v4');
 const yelp = require('yelp-fusion');
 const apiKey = 'xdxekdQFNmWtSJak4pjq30yjNyydowXC-KaJ4FUw1H4MqdYU7RDaQpb5Oj3mfkMzuYq9AUa2-f794VztEYhFt9uwsGZQoqLmStfyutlyLAfwJhAyAiI1F5jPp6kEXHYx';
 const client = yelp.client(apiKey);
@@ -62,11 +64,15 @@ async function main() {
     const db = await dbConnection();
     await db.dropDatabase();
 
+    let userIds = [];
+
     for (let b in baseUsers) {
-        await users.addUser(baseUsers[b].hashedPassword, baseUsers[b].username, baseUsers[b].name);
-        console.log('Added', baseUsers[b])
+        const addedUser = await users.addUser(baseUsers[b].hashedPassword, baseUsers[b].username, baseUsers[b].name);
+        userIds.push(addedUser._id);
+        console.log('Added', addedUser);
     }
 
+    //console.log(userIds);
     //may be able to use Promise.all() here for many location requests
     for (let s in searchRequest) {
         const p = await client.search(searchRequest[s]); //get the list of businesses
@@ -77,6 +83,43 @@ async function main() {
             //console.log('added', list[l]);
         }
     }
+
+    const allBusinesses = await businesses.getAllBusinesses();
+    let aliases = [];
+
+    for (let biz in allBusinesses) {
+        aliases.push(allBusinesses[biz].alias)
+    }
+
+    for (let a in aliases) {
+        let reviewsObjects = await client.reviews(aliases[a]);
+        let reviewList = reviewsObjects.jsonBody.reviews;
+
+        for (let r in reviewList) {
+            let business = await businesses.getBusinessByAlias(aliases[a]);
+            let businessId = business.id;
+            let newReview = {
+                _id: uuid(),
+                userId: userIds[Math.floor(Math.random() * userIds.length)],
+                title: 'Title',
+                text: reviewList[r].text,
+                rating: reviewList[r].rating,
+                time_created: reviewList[r].time_created,
+                business: businessId,
+                image_url: reviewList[r].url
+            };
+
+            let added = await reviews.addReviewSeed(newReview);
+            console.log(added)
+        }
+    }
+
+    await businesses.createIndex();
+    await users.createIndex();
+    await reviews.createIndex();
+
+    //let reviewCollection = await reviews.getAllReviews();
+    //console.log(reviewCollection);
 
     console.log('database seeded');
     db.close()
