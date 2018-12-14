@@ -124,6 +124,7 @@ router.post("/reviewcreated", async (req, res) => {
      
    if (entry) {
     //res.json("users/private", {user: entry});
+    var result = "Thanks for your valuable review, review details are as follows: " +entry;
     res.status(400).json({entry});
    }    
 });
