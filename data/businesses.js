@@ -9,8 +9,14 @@ let exportedMethods = {
 
     createIndex() {
         return businesses().then(businessCollection => {
-            businessCollection.createIndex({phone: 'text', name: 'text', location: 'text', transactions: 'text', price: 'text', alias: 'text', categories: 'text'})
+            businessCollection.createIndex({'$**': 'text'})
         })
+    },
+
+    getBusinessesBySearchTerm(searchTerm) {
+      return businesses().then(businessCollection => {
+          return businessCollection.find({$text: {$search: searchTerm}}).toArray();
+      })
     },
 
     getAllBusinesses() {

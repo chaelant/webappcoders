@@ -9,7 +9,13 @@ let exportedMethods = {
 
     createIndex() {
         return reviews().then(reviewCollection => {
-            reviewCollection.createIndex({title: 'text', text: 'text', business: 'text'})
+            reviewCollection.createIndex({'$**': 'text'})
+        })
+    },
+
+    getReviewsBySearchTerm(searchTerm) {
+        return reviews().then(reviewCollection => {
+            return reviewCollection.find({$text: {$search: searchTerm}}).toArray();
         })
     },
 

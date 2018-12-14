@@ -11,7 +11,13 @@ let exportedMethods = {
 
     createIndex() {
         return users().then(userCollection => {
-            userCollection.createIndex({name: 'text', username: 'text'});
+            userCollection.createIndex({'$**': 'text'});
+        })
+    },
+
+    getUsersBySearchTerm(searchTerm) {
+        return users().then(userCollection => {
+            return userCollection.find({$text: {$search: searchTerm}}).toArray();
         })
     },
 
