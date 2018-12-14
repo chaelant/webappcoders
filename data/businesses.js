@@ -7,6 +7,12 @@ const uuid = require('uuid/v4');
 
 let exportedMethods = {
 
+    createIndex() {
+        return businesses().then(businessCollection => {
+            businessCollection.createIndex({phone: 'text', name: 'text', location: 'text', transactions: 'text', price: 'text', alias: 'text', categories: 'text'})
+        })
+    },
+
     getAllBusinesses() {
         return businesses().then(businessCollection => {
             return businessCollection.find({}).toArray();
@@ -16,6 +22,15 @@ let exportedMethods = {
     getBusinessById(id) {
         return businesses().then(businessCollection => {
             return businessCollection.findOne({ _id: id }).then(business => {
+                if (!business) throw "Business not found";
+                return business;
+            })
+        })
+    },
+
+    getBusinessByAlias(alias) {
+        return businesses().then(businessCollection => {
+            return businessCollection.findOne({alias: alias}).then(business => {
                 if (!business) throw "Business not found";
                 return business;
             })

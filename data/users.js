@@ -9,6 +9,12 @@ const saltRounds = 16;
 
 let exportedMethods = {
 
+    createIndex() {
+        return users().then(userCollection => {
+            userCollection.createIndex({name: 'text', username: 'text'});
+        })
+    },
+
     async addUser(Password, username, name) {
        // users().then(userCollection => {
 

@@ -7,6 +7,12 @@ const uuid = require('uuid/v4');
 
 let exportedMethods = {
 
+    createIndex() {
+        return reviews().then(reviewCollection => {
+            reviewCollection.createIndex({title: 'text', text: 'text', business: 'text'})
+        })
+    },
+
     getAllReviews() {
         return reviews().then(reviewCollection => {
             return reviewCollection.find({}).toArray();
@@ -34,25 +40,11 @@ let exportedMethods = {
         });
     },
 
-    //takes a business object, a user object, and a review object
-    addReview(business, user, review) {
+    //takes a review object
+    addReviewSeed(review) {
         return reviews().then(reviewCollection => {
-
-            const now = new Date();
-
-            let newReview = {
-                _id: uuid(),
-                userId: user._id,
-                title: review.title,
-                text: review.text,
-                rating: review.rating,
-                time_created: now,
-                business: business._id,
-                image_url: review.image_url
-            };
-
             return reviewCollection
-                .insertOne(newReview)
+                .insertOne(review)
                 .then(newInsertInformation => {
                     return newInsertInformation.insertedId;
                 })
@@ -74,6 +66,7 @@ let exportedMethods = {
             });
         });
     },
+
     addReview(userid, title, text, rating, timecreated, businessId, imageurl) {
         return reviews().then(reviewCollection => {
 
