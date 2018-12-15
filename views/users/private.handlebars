@@ -3,13 +3,17 @@
   <form action="/users/review" method="POST" class="new-post-form">
     <div class="col-sm-12 col-md-12" id="todo-area">
       {{!-- <p>UserId: {{user._id}}</p> --}}
-      <input id="UserId" name="UserId" type="text" value="{{user._id}}">
+      <input id="UserId" name="UserId" type="text" value="{{user._id}}" hidden>
       <p>Username: {{user.username}}</p>
       <p>name: {{user.name}}</p>
     </div>
     <div>
        <h3>Existing reviews:</h3>
        {{#each reviews}} {{> review_item }} {{/each}}
+    </div>
+    <div>
+       <h3>Favorite business:</h3>
+       {{#each favbusiness}} {{> business_item }} {{/each}}
     </div>
 
     <div class="col-sm-12 col-md-6">
