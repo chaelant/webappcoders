@@ -1,24 +1,28 @@
 <section>
-    <h1>{{business.name}}</h1>
-    <img src="{{business.image_url}}" alt="Picture of Business" height="400" width="300">
-    <p>{{business.location.display_address}}</p>
-    <p class="detailphone">{{business.phone}}</p>  
-    <p>{{business.rating}} Stars</p>
-    <p>{{business.price}}</p>
-    {{!-- <p>{{business.categories.title}}</p> --}}
-    {{#each business.categories}}
-        <p>{{title}}</p>
-    {{/each}}
-    {{!-- <p>{{business.categories}}</p> --}}
-    {{!-- <p>{{business.transactions}}</p> --}}
-    {{!-- <div class="reviews">
+    <a href="/"><button type="button">Go Back</button></a>
+    <div class="bizdiv">
+        <h1 class="businessdetail bizname">{{business.name}}</h1>
+        <img src="{{business.image_url}}" alt="Picture of Business" height="300" width="auto" class="businessdetail bizimg">
+        <p class="businessdetail bizaddress">{{business.location.display_address}}</p>
+        <p class="businessdetail bizphone">{{business.phone}}</p>  
+        <p class="businessdetail bizcat">Categories:</p>
+        {{#each business.categories}}
+            <p class="businessdetail bizcategory ">| {{title}} |</p>
+        {{/each}}
+        <p class="businessdetail bizrating"><br/>{{business.rating}} Star(s)</p>
+        <p class="businessdetail bizprice"> | Price: {{business.price}}</p>
+    </div>
+    <div class="reviews">
         <h3>Reviews</h3>
-        <p>{{business.review_count}}</p>
+        <p>{{business.review_count}} Review(s)</p>
         {{#each reviews}}
         <article>
-            <h4>{{title}}</h4>
+            <p>{{title}}</p>
             <p>{{username}}</p>
+            <p>{{time_created}}</p>
+            <p>{{rating}}</p>
+            <p>{{text}}</p>
         </article>
         {{/each}}
-    </div> --}}
+    </div>
 </section>

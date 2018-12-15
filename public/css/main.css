@@ -136,15 +136,45 @@ form label {
 
 .topnav-right {
   float: right;
-  padding:20px
+  padding:20px;
 }
 
 /* Details Page */
+
 
 .businessborder {
   border: 2px solid;
 }
 
-.detailphone {
-  color: red;
+.bizdiv {
+  text-align: center;
 }
+
+.bizaddress {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.bizrating, .bizprice {
+  display: inline;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.bizcategory,.bizcat {
+  display: inline-block;
+  line-height: 20px;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+.bizaddress, .bizphone {
+  margin-bottom: 0px;
+}
+
+.bizphone {
+  line-height: 20px;
+  font-size: 14px;
+}
+
