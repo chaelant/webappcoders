@@ -207,3 +207,8 @@ a:hover {
 .navbar {
   background-color: #78909c;
 }
+
+/* For Search */
+.searchlist {
+  list-style-type: none;
+}
