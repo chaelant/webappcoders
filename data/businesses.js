@@ -54,7 +54,7 @@ let exportedMethods = {
                 alias: business.alias,
                 is_closed: business.is_closed,
                 categories: business.categories,
-                review_count: business.review_count, //this gets updated with each added review
+                review_count: 0, //this gets updated with each added review
                 name: business.name,
                 coordinates: business.coordinates,
                 image_url: business.image_url,
@@ -72,6 +72,18 @@ let exportedMethods = {
                     return this.getBusinessById(newId);
                 });
         });
+    },
+
+    updateReviewCount(id, reviewCount) {
+        return businesses().then(businessCollection => {
+            return businessCollection.updateOne({_id: id}, {$set: {review_count: reviewCount}}).then(updateInfo => {
+                if (updateInfo.modifiedCount === 0) {
+                    throw `Could not update review count of business with id of ${id}`;
+                } else {
+                    return this.getBusinessById(id);
+                }
+            })
+        })
     },
 
     deleteBusiness(id) {

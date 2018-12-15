@@ -111,7 +111,7 @@ async function main() {
             if (business === false) {
                 pass
             } else {
-                let businessId = business.id;
+                let businessId = business._id;
                 let newReview = {
                     _id: uuid(),
                     userId: userIds[Math.floor(Math.random() * userIds.length)],
@@ -124,8 +124,12 @@ async function main() {
                 };
 
                 let added = await reviews.addReviewSeed(newReview);
-            }
+                //console.log(added);
+                let reviewCount = business.review_count;
+                reviewCount++;
+                await businesses.updateReviewCount(businessId, reviewCount);
 
+            }
         }
     }
 
