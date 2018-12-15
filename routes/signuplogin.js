@@ -39,6 +39,10 @@ router.get("/signup", (req, res) => {
   res.render("users/signup", { post: post });
 });
 
+router.get("/createBuisness", (req, res) => {
+  res.render("users/createBuisness");
+});
+
 router.post("/signup", async (req, res) => {
   let userInfo = req.body;
   let errors = [];
@@ -157,6 +161,26 @@ router.post("/reviewcreated", async (req, res) => {
     var userReviews = await reviews.getReviewsByUserId(mUser._id);
     res.render("users/private", {user: mUser, reviews: userReviews});
    }    
+});
+
+router.post("/createBuisness", (req, res) => {
+  const buis = {
+    rating: 0, //this gets updated with each added review
+    price: req.body.price,
+    phone: req.body.phone,
+    alias: req.body.name,
+    is_closed: false,
+    categories: [req.body.categories],
+    review_count: 0, //this gets updated with each added review
+    name: req.body.name,
+    coordinates: req.body.address,
+    image_url: req.body.image_url,
+    location: {display_address: req.body.address},
+    transactions: "idk",
+    distance: "idk" //dependent on user location
+  }
+  businesses.addBusiness(buis);
+  res.redirect("/");
 });
 
 
