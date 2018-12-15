@@ -76,8 +76,6 @@ let exportedMethods = {
     addReview(userid, title, text, rating, timecreated, businessId, imageurl) {
         return reviews().then(reviewCollection => {
 
-            const now = new Date();
-
             let newReview = {
                 _id: uuid(),
                 userId: userid,
