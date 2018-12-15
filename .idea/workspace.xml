@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6469c425-5173-4005-b68a-a61609eac16f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/businesses.js" beforeDir="false" afterPath="$PROJECT_DIR$/data/businesses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/seed.js" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/seed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,28 +20,25 @@
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="544">
-              <caret line="34" column="3" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tasks/seed.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="18" />
+              <caret line="35" column="3" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tasks/seed.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="538">
+              <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state relative-caret-position="-827">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -62,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/businesses.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="174">
+              <caret line="78" column="94" selection-start-line="78" selection-start-column="59" selection-end-line="78" selection-end-column="94" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -105,16 +101,16 @@
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/db.js" />
         <option value="$PROJECT_DIR$/data/reviews.js" />
-        <option value="$PROJECT_DIR$/data/users.js" />
         <option value="$PROJECT_DIR$/data/businesses.js" />
         <option value="$PROJECT_DIR$/tasks/seed.js" />
+        <option value="$PROJECT_DIR$/data/users.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="720" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="349" />
     <option name="y" value="23" />
-    <option name="width" value="720" />
+    <option name="width" value="1440" />
     <option name="height" value="823" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -225,7 +221,7 @@
       <workItem from="1544770059428" duration="9904000" />
       <workItem from="1544783927371" duration="336000" />
       <workItem from="1544844944715" duration="3311000" />
-      <workItem from="1544852196882" duration="2113000" />
+      <workItem from="1544852196882" duration="3899000" />
     </task>
     <task id="LOCAL-00001" summary="commented out">
       <created>1543205374317</created>
@@ -290,14 +286,21 @@
       <option name="project" value="LOCAL" />
       <updated>1544851956230</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="review counts updated">
+      <created>1544854380880</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1544854380880</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69716000" />
+    <option name="totallyTimeSpent" value="71502000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="720" y="23" width="720" height="823" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="823" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.22961374" />
@@ -372,7 +375,8 @@
     <MESSAGE value="added user and review routes and methods" />
     <MESSAGE value="comments" />
     <MESSAGE value="fixed duplicate business bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed duplicate business bug" />
+    <MESSAGE value="review counts updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="review counts updated" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.js">
@@ -513,17 +517,7 @@
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
-          <caret line="34" column="3" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <caret line="35" column="3" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -539,8 +533,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/businesses.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="174">
+          <caret line="78" column="94" selection-start-line="78" selection-start-column="59" selection-end-line="78" selection-end-column="94" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -549,8 +543,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tasks/seed.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="538">
           <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-827">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
