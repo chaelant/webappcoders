@@ -22,7 +22,6 @@ router.post('/search', async(req,res) => {
         } catch (e) {
             res.sendStatus(500);
         }
-    return    
 });
 
 

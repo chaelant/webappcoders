@@ -3,6 +3,7 @@
 
 const mongoCollection = require('../config/mongoCollections');
 const reviews = mongoCollection.reviews;
+const businessFunc = require('./businesses');
 const uuid = require('uuid/v4');
 
 let exportedMethods = {
