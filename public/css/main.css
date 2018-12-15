@@ -151,13 +151,13 @@ form label {
 }
 
 .bizaddress {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 }
 
 .bizrating, .bizprice {
   display: inline;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 20px;
 }
@@ -165,7 +165,7 @@ form label {
 .bizcategory,.bizcat {
   display: inline-block;
   line-height: 20px;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 0px;
 }
 
@@ -175,6 +175,59 @@ form label {
 
 .bizphone {
   line-height: 20px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
+.bizimage {
+  margin: 8px;
+}
+
+.revdiv {
+  line-height: 20px;
+}
+
+.rev {
+  line-height: 20px;
+}
+
+.revarticle {
+  border-top: 2px solid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.revreview {
+  font-weight: bold;
+  font-size: 14px
+}
+
+.revheader {
+  font-size: 32px;
+}
+
+.revtitle {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.revusername {
+  font-size: 14px;
+  margin: 0px;
+}
+
+.revtime {
+  font-size: 12px;
+  margin: 0px;
+}
+
+.revrating {
+  text-align: center;
+  font-size: 16px;
+}
+
+.revtext {
+  text-align: center;
+  margin: none;
+  font-size: 16px;
+}

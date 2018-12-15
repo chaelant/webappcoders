@@ -1,27 +1,29 @@
 <section>
     <a href="/"><button type="button">Go Back</button></a>
     <div class="bizdiv">
-        <h1 class="businessdetail bizname">{{business.name}}</h1>
-        <img src="{{business.image_url}}" alt="Picture of Business" height="300" width="auto" class="businessdetail bizimg">
-        <p class="businessdetail bizaddress">{{business.location.display_address}}</p>
-        <p class="businessdetail bizphone">{{business.phone}}</p>  
-        <p class="businessdetail bizcat">Categories:</p>
+        <h1 class="bizname">{{business.name}}</h1>
+        <img src="{{business.image_url}}" alt="Picture of Business" height="300" width="auto" class="bizimg">
+        <p class="bizaddress">{{business.location.display_address}}</p>
+        {{#if business.phone}}
+            <p class="bizphone">{{business.phone}}</p>
+        {{/if}}  
+        <p class="bizcat">Categories:</p>
         {{#each business.categories}}
             <p class="businessdetail bizcategory ">| {{title}} |</p>
         {{/each}}
         <p class="businessdetail bizrating"><br/>{{business.rating}} Star(s)</p>
         <p class="businessdetail bizprice"> | Price: {{business.price}}</p>
     </div>
-    <div class="reviews">
-        <h3>Reviews</h3>
-        <p>{{business.review_count}} Review(s)</p>
+    <div class="revdiv">
+        <h2 class="rev revheader">Reviews</h2>
+        <p class="revreview">{{business.review_count}} Review(s)</p>
         {{#each reviews}}
-        <article>
-            <p>{{title}}</p>
-            <p>{{username}}</p>
-            <p>{{time_created}}</p>
-            <p>{{rating}}</p>
-            <p>{{text}}</p>
+        <article class="revarticle">
+            <p class="rev revp revtitle">{{title}}</p>
+            <p class="rev revp revusername">-{{username}}</p>
+            <p class="rev revp revtime">{{time_created}}</p>
+            <p class="rev revrating">{{rating}} Stars</p>
+            <p class="rev revtext">{{text}}</p>
         </article>
         {{/each}}
     </div>

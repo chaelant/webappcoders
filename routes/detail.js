@@ -18,12 +18,16 @@ router.get('/:id', async(req, res) => {
             const revuser = await getUserById(rev.userId);
             rev["username"] = revuser.username;
         }
-        let newnum = business.phone.split("").slice(-10);
-        newnum[0] = "(" + newnum[0];
-        newnum[2] += ") ";
-        newnum[5] += "-";
-        newnum = newnum.join("");
-        business.phone = newnum;
+        if (business.phone && typeof business.phone !== "String") {
+            let newnum = business.phone.split("").slice(-10);
+            newnum[0] = "(" + newnum[0];
+            newnum[2] += ") ";
+            newnum[5] += "-";
+            newnum = newnum.join("");
+            business.phone = newnum;
+        } else {
+            business.phone = null;
+        }
     } catch (err) {
         res.status(404).render("detail/error", {error: err});
         console.log(err);
