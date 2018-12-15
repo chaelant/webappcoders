@@ -118,6 +118,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/review", async (req, res) => {
     let userInfo = req.body;
+    console.log(userInfo);
     let errors = [];
     if (!userInfo) {
         res.status(400).json({ error: "You must provide data to create a user" });
