@@ -37,7 +37,7 @@ let exportedMethods = {
     getBusinessByAlias(alias) {
         return businesses().then(businessCollection => {
             return businessCollection.findOne({alias: alias}).then(business => {
-                if (!business) throw "Business not found";
+                if (!business) return false;
                 return business;
             })
         })

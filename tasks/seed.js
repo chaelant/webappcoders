@@ -83,7 +83,12 @@ async function main() {
         const list = p.jsonBody.businesses;
 
         for (let l in list) {
-            await businesses.addBusiness(list[l]);
+            const findBusiness = await businesses.getBusinessByAlias(list[l].alias);
+            if (findBusiness === false) {
+                await businesses.addBusiness(list[l]);
+            } else {
+
+            }
         }
     }
 
@@ -103,19 +108,24 @@ async function main() {
 
         for (let r in reviewList) {
             let business = await businesses.getBusinessByAlias(aliases[a]);
-            let businessId = business.id;
-            let newReview = {
-                _id: uuid(),
-                userId: userIds[Math.floor(Math.random() * userIds.length)],
-                title: 'Title',
-                text: reviewList[r].text,
-                rating: reviewList[r].rating,
-                time_created: reviewList[r].time_created,
-                business: businessId,
-                image_url: reviewList[r].url
-            };
+            if (business === false) {
+                pass
+            } else {
+                let businessId = business.id;
+                let newReview = {
+                    _id: uuid(),
+                    userId: userIds[Math.floor(Math.random() * userIds.length)],
+                    title: 'Title',
+                    text: reviewList[r].text,
+                    rating: reviewList[r].rating,
+                    time_created: reviewList[r].time_created,
+                    business: businessId,
+                    image_url: reviewList[r].url
+                };
 
-            let added = await reviews.addReviewSeed(newReview);
+                let added = await reviews.addReviewSeed(newReview);
+            }
+
         }
     }
 
