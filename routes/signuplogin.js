@@ -8,6 +8,27 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 16;
 let mUser = null;
 
+//Middlewares to block access to restricted routes!!!
+
+// 1. One which will count the number of requests that have been made to the current path
+const pathsAccessed = {};
+router.use(function(request, response, next) {
+  if (!pathsAccessed[request.path]) pathsAccessed[request.path] = 0;
+  pathsAccessed[request.path]++;
+  console.log("There have now been " +
+      pathsAccessed[request.path] +
+      " requests made to " + request.path);
+  next();
+});
+
+router.get("/private", function(request, response) {
+  response.status(200).send("You are not allowed to access this without login/signup first!!!");
+});
+
+router.get("/reviewcreated", function(request, response) {
+  response.status(200).send("You are not allowed to access this without login/signup first!!!");
+});
+
 router.get("/login", (req, res) => {
   const post = users.getAllUsers();
   res.render("users/login", { post: post });
