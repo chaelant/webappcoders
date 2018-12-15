@@ -11,7 +11,7 @@ $.ajax({
 	dataType: "json",
   success : function(data) {
     $.each(data, function(i, business) {
-      $businesses.append('<li class="searchlist">'+ business.alias +'</li>');
+      $businesses.append('<li class="searchlist"> <a href="/detail/'+business._id+'">'+ business.alias +'</a></li>');
     });
   }
 }); 
