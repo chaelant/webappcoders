@@ -139,6 +139,11 @@ form label {
   padding:20px;
 }
 
+.topnav-left {
+  padding: 20px;
+  float: left;
+}
+
 /* Details Page */
 
 
@@ -197,4 +202,8 @@ a:hover {
 
 .category-label {
   font-weight: bold;
+}
+
+.navbar {
+  background-color: #78909c;
 }
