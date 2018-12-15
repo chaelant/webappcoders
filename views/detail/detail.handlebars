@@ -7,22 +7,25 @@
         {{#if business.phone}}
             <p class="bizphone">{{business.phone}}</p>
         {{/if}}  
-        <p class="bizcat">Categories:</p>
-        {{#each business.categories}}
-            <p class="businessdetail bizcategory ">| {{title}} |</p>
-        {{/each}}
-        <p class="businessdetail bizrating"><br/>{{business.rating}} Star(s)</p>
+        <div class="catdiv">
+            <p class="bizcat">Categories:</p>
+            {{#each business.categories}}
+                <p class="businessdetail bizcategory">| {{title}} |&nbsp;&nbsp;</p>
+            {{/each}}
+        </div>
+        <p class="businessdetail bizrating"><br/>{{business.rating}} ★ </p>
         <p class="businessdetail bizprice"> | Price: {{business.price}}</p>
     </div>
     <div class="revdiv">
-        <h2 class="rev revheader">Reviews</h2>
+        <h2 class="rev revheader revb">Reviews</h2>
+        <a href="/"><button type="button" class="revb revbutton">Post a Review</button></a>
         <p class="revreview">{{business.review_count}} Review(s)</p>
         {{#each reviews}}
         <article class="revarticle">
             <p class="rev revp revtitle">{{title}}</p>
             <p class="rev revp revusername">-{{username}}</p>
             <p class="rev revp revtime">{{time_created}}</p>
-            <p class="rev revrating">{{rating}} Stars</p>
+            <p class="rev revrating">{{rating}} ★</p>
             <p class="rev revtext">{{text}}</p>
         </article>
         {{/each}}

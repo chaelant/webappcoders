@@ -1,6 +1,3 @@
-//methods to add:
-    //deleteUser(userId)
-
 const mongoCollection = require('../config/mongoCollections');
 const users = mongoCollection.users;
 const uuid = require('uuid/v4');
@@ -22,32 +19,22 @@ let exportedMethods = {
     },
 
     async addUser(Password, username, name) {
-       // users().then(userCollection => {
 
            const newUser = {
             _id: uuid(),
             sessionId: uuid(),
             hashedPassword: Password,
             name: name,
-            username: username
+            username: username,
+            favorites: []
            };
 
            const userCollection = await users();
            const newInsertInformation = await userCollection.insertOne(newUser);
            const newId = newInsertInformation.insertedId;
            return await this.getSelectedUserById(newId);
-
-            // return userCollection
-            //     .insertOne({newUser})
-            //     .then(function (newDoc) {
-            //         return newDoc.insertedId;
-            //     })
-            //     .then(function (newId) {
-            //         let newUser = exportedMethods.getSelectedUserById(newId);
-            //         return newUser;
-            //     });
-        //})
     },
+
     async checkIfValidUser(username, password) {
         var newusers = await this.getAllUsers();
         for (const element of newusers) {
@@ -89,6 +76,18 @@ let exportedMethods = {
                 }
             });
         });
+    },
+
+    addFavoriteBusiness(businessId, userId) {
+        return users().then(userCollection => {
+            return userCollection.updateOne({_id: userId}, {$push: {favorites: businessId}}).then(updatedUser => {
+                if (updatedUser.modifiedCount === 0) {
+                    throw `Could not add favorite to user with id of ${userId}`;
+                } else {
+                    return true;
+                }
+            })
+        })
     }
 };
 

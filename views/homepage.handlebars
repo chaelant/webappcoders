@@ -1,6 +1,6 @@
-<section>
+<section class="main-section">
     <h2>Recomended Businesses:</h2>
-    <article>
+    <article class="business-wrapper">
         {{#each business}}
             <div class="businessborder position">
                 <a href="/detail/{{_id}}">
@@ -10,10 +10,12 @@
                     </div>
                 </a>
                 <p>{{location.display_address}}</p>
-                <p>{{rating}} Stars</p>
-                <p>{{price}}</p>
+                <span>
+                    <p>{{rating}} ★ | {{price}}</p>
+                </span>
+                <span class="category-label">Categories: </span>
                 {{#each categories}}
-                    <p>{{title}}</p>
+                    {{title}};
                 {{/each}}
             </div>
         {{/each}}

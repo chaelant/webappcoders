@@ -8,7 +8,7 @@ body {
 }
 
 body {
-  background: #dedede;
+  background: #e0e0e0;
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
@@ -139,11 +139,21 @@ form label {
   padding:20px;
 }
 
+.topnav-left {
+  padding: 20px;
+  float: left;
+}
+
 /* Details Page */
 
 
 .businessborder {
   border: 2px solid;
+  border-bottom: double;
+  border-top: double;
+  /* width: 50%; */
+  background-color: #eeeeee;
+  margin: 10px;
 }
 
 .bizdiv {
@@ -178,16 +188,30 @@ form label {
   font-size: 16px;
 }
 
-.bizimage {
+.bizimg {
   margin: 8px;
 }
 
-.revdiv {
-  line-height: 20px;
+.catdiv {
+  display: inline-block;
 }
+
+/* .revdiv {
+  line-height: 20px;
+} */
 
 .rev {
   line-height: 20px;
+}
+
+.revb {
+  display: inline-block;
+}
+
+.revbutton {
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .revarticle {
@@ -230,4 +254,28 @@ form label {
   text-align: center;
   margin: none;
   font-size: 16px;
+}
+
+/* End of Details */
+
+
+a:hover {
+  text-decoration: none;
+  color: orangered;
+}
+
+.main-section {
+  text-align: center;
+}
+
+.business-wrapper {
+  display: inline-block;
+}
+
+.category-label {
+  font-weight: bold;
+}
+
+.navbar {
+  background-color: #78909c;
 }
