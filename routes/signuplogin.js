@@ -12,7 +12,7 @@ let mUser = null;
 
 // 1. One which will count the number of requests that have been made to the current path
 const pathsAccessed = {};
-router.use(function(request, response, next) {
+router.use(function (request, response, next) {
     if (!pathsAccessed[request.path]) pathsAccessed[request.path] = 0;
     pathsAccessed[request.path]++;
     console.log("There have now been " +
@@ -21,11 +21,11 @@ router.use(function(request, response, next) {
     next();
 });
 
-router.get("/private", function(request, response) {
+router.get("/private", function (request, response) {
     response.status(200).send("You are not allowed to access this without login/signup first!!!");
 });
 
-router.get("/reviewcreated", function(request, response) {
+router.get("/reviewcreated", function (request, response) {
     response.status(200).send("You are not allowed to access this without login/signup first!!!");
 });
 
@@ -35,7 +35,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-    const post =  users.getAllUsers();
+    const post = users.getAllUsers();
     res.render("users/signup", { post: post });
 });
 
@@ -71,15 +71,30 @@ router.post("/signup", async (req, res) => {
     let newUser = await users.addUser(hashpassword, userInfo.username, name, null);
     mUser = newUser;
 
-    if(newUser) {
+    if (newUser) {
         //res.json(newUser);
         var userReviews = await reviews.getReviewsByUserId(mUser._id);
-        var favbusiness = await users.getFavoriteBusinesses(mUser._id);
-        res.render("users/private", { user: newUser, reviews:userReviews, businesses: favbusiness});
+        //var favbusiness = await users.getFavoriteBusinesses(mUser._id);
+
+        var favbusinesses = [];
+        try {
+            var favBusiness = await users.getFavoriteBusinesses(mUser._id);
+            for (let busId of favBusiness) {
+                const entry = await businesses.getBusinessById(busId);
+                favbusinesses.push(entry);
+            }
+        } catch (ex) {
+
+        }
+
+
+        res.render("users/private", { user: newUser, reviews: userReviews, businesses: favbusinesses });
     } else {
         errors.push("Either Username or password invalid");
-        res.render("users/signup", { hasErrors: true,
-            errors: errors });
+        res.render("users/signup", {
+            hasErrors: true,
+            errors: errors
+        });
     }
 });
 
@@ -108,14 +123,26 @@ router.post("/login", async (req, res) => {
     if (newUser) {
         //valid user found
         var userReviews = await reviews.getReviewsByUserId(mUser._id);
-        var favbusiness = await users.getFavoriteBusinesses(mUser._id);
-        res.render("users/private", { user: newUser, reviews:userReviews, businesses: favbusiness});
+        var favbusinesses = [];
+        try {
+            var favBusiness = await users.getFavoriteBusinesses(mUser._id);
+            for (let busId of favBusiness) {
+                const entry = await businesses.getBusinessById(busId);
+                favbusinesses.push(entry);
+            }
+        } catch (ex) {
+
+        }
+
+        res.render("users/private", { user: newUser, reviews: userReviews, businesses: favbusinesses });
         //res.render("users/private", {user: newUser, reviews: userReviews});
     } else {
         errors.push("Either Username or password invalid");
         res.render("users/login",
-            {hasErrors: true,
-                errors: errors});
+            {
+                hasErrors: true,
+                errors: errors
+            });
     }
 });
 
@@ -134,7 +161,7 @@ router.post("/review", async (req, res) => {
     }
 
     var entries = await businesses.getAllBusinesses();
-    res.render("users/reviewselector", { business: entries});
+    res.render("users/reviewselector", { business: entries });
 });
 
 router.post("/reviewcreated", async (req, res) => {
@@ -161,6 +188,20 @@ router.post("/reviewcreated", async (req, res) => {
     var entry = await reviews.addReview(userId, userInfo.businessname,
         userInfo.newtask_description, reviewRating, new Date().getTime, userInfo.businessid, null);
 
+    if (reviewRating > 3) {
+        var businessAdded = await users.addFavoriteBusiness(userInfo.businessid, userId);
+    }
+    var favbusiness = [];
+    try {
+        var favBusinesses = await users.getFavoriteBusinesses(userId);
+        for (let busId of favBusinesses) {
+            const entry = await businesses.getBusinessById(busId);
+            favbusiness.push(entry);
+        }
+    } catch (ex) {
+
+    }
+
     if (entry) {
         // const allBusinesses = await businesses.getAllBusinesses();
         // res.render("homepage", {business: allBusinesses});
@@ -170,7 +211,7 @@ router.post("/reviewcreated", async (req, res) => {
         await businesses.updateAverageRating(userInfo.businessid);
         await businesses.updateReviewCount(userInfo.businessid, newCount);
         var userReviews = await reviews.getReviewsByUserId(mUser._id);
-        res.render("users/private", {user: mUser, reviews: userReviews});
+        res.render("users/private", { user: mUser, reviews: userReviews, businesses: favbusiness });
     }
 });
 
@@ -186,7 +227,7 @@ router.post("/createBusiness", (req, res) => {
         name: req.body.name,
         coordinates: req.body.address,
         image_url: req.body.image_url,
-        location: {display_address: req.body.address},
+        location: { display_address: req.body.address },
         transactions: "idk",
         distance: "idk" //dependent on user location
     };
