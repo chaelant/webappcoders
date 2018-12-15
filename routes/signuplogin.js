@@ -148,13 +148,16 @@ router.post("/reviewcreated", async (req, res) => {
     return;
   }
 
- var entry = await reviews.addReview(userId, userInfo.businessname, 
-       userInfo.newtask_description, 4, new Date().getTime, userInfo.businessid, null);
-     
-   if (entry) {
+  let reviewRating = parseFloat(userInfo.newtask_rating)
+
+  var entry = await reviews.addReview(userId, userInfo.businessname,
+       userInfo.newtask_description, reviewRating, new Date().getTime, userInfo.businessid, null);
+
+    if (entry) {
     // const allBusinesses = await businesses.getAllBusinesses();
     // res.render("homepage", {business: allBusinesses});
-    var userReviews = await reviews.getReviewsByUserId(mUser._id);
+        await businesses.updateAverageRating(userInfo.businessid);
+        var userReviews = await reviews.getReviewsByUserId(mUser._id);
     res.render("users/private", {user: mUser, reviews: userReviews});
    }    
 });
