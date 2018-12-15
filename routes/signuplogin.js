@@ -74,7 +74,8 @@ router.post("/signup", async (req, res) => {
     if(newUser) {
         //res.json(newUser);
         var userReviews = await reviews.getReviewsByUserId(mUser._id);
-        res.render("users/private", { user: newUser, reviews:userReviews});
+        var favbusiness = await users.getFavoriteBusinesses(mUser._id);
+        res.render("users/private", { user: newUser, reviews:userReviews, businesses: favbusiness});
     } else {
         errors.push("Either Username or password invalid");
         res.render("users/signup", { hasErrors: true,
@@ -107,7 +108,9 @@ router.post("/login", async (req, res) => {
     if (newUser) {
         //valid user found
         var userReviews = await reviews.getReviewsByUserId(mUser._id);
-        res.render("users/private", {user: newUser, reviews: userReviews});
+        var favbusiness = await users.getFavoriteBusinesses(mUser._id);
+        res.render("users/private", { user: newUser, reviews:userReviews, businesses: favbusiness});
+        //res.render("users/private", {user: newUser, reviews: userReviews});
     } else {
         errors.push("Either Username or password invalid");
         res.render("users/login",
