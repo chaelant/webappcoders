@@ -22,7 +22,7 @@ let exportedMethods = {
 
            const newUser = {
             _id: uuid(),
-            sessionId: uuid(),
+            sessionId: [],
             hashedPassword: Password,
             name: name,
             username: username,
@@ -85,6 +85,18 @@ let exportedMethods = {
                     throw `Could not add favorite to user with id of ${userId}`;
                 } else {
                     return true;
+                }
+            })
+        })
+    },
+
+    getFavoriteBusinesses(userId) {
+        return users().then(userCollection => {
+            return userCollection.findOne({_id: userId}).then(foundUser => {
+                if (!foundUser) {
+                    throw `No user with id of ${userId}`;
+                } else {
+                    return foundUser.favorites;
                 }
             })
         })

@@ -2,6 +2,7 @@
     //deleteBusiness(businessId)
 const mongoCollection = require('../config/mongoCollections');
 const businesses = mongoCollection.businesses;
+const reviews = require('./reviews');
 const uuid = require('uuid/v4');
 
 
@@ -48,7 +49,7 @@ let exportedMethods = {
         return businesses().then(businessCollection => {
             let newBusiness = {
                 _id: uuid(), //repeatedly got duplicate key errors. will ensure that this matches in the review's businessId
-                rating: business.rating, //this gets updated with each added review
+                rating: 0.0, //this gets updated with each added review
                 price: business.price,
                 phone: business.phone,
                 alias: business.alias,
@@ -82,6 +83,39 @@ let exportedMethods = {
                 } else {
                     return this.getBusinessById(id);
                 }
+            })
+        })
+    },
+
+    updateAverageRating(businessId) {
+        return reviews.getReviewsByBusiness(businessId).then(reviewList => {
+            var cumulativeRating = 0;
+            for (let r in reviewList) {
+
+                if (typeof reviewList[r].rating === 'string') {
+                    let rated = Number.parseFloat(reviewList[r].rating).toFixed(1);
+                    cumulativeRating = cumulativeRating + rated;
+                } else {
+                    let rated = reviewList[r].rating;
+                    cumulativeRating = cumulativeRating + rated;
+                }
+
+            }
+            if (cumulativeRating <= 0) {
+                return 0
+            } else {
+                return Number.parseFloat(cumulativeRating / reviewList.length).toFixed(1);
+            }
+
+        }).then(newAverage => {
+            return businesses().then(businessCollection => {
+                businessCollection.updateOne({_id: businessId}, {$set: {rating: newAverage}}).then(updateInfo => {
+                    if (updateInfo.modifiedCount === 0){
+                        throw `Could not update rating of business with id of ${businessId}`;
+                    } else {
+                        return newAverage;
+                    }
+                })
             })
         })
     },

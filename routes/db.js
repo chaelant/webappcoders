@@ -7,12 +7,22 @@ const businesses = data.businesses;
 router.get('/', async(req, res) => {
     //leverage getBusinessBySearchTerm with req.body to filter for landing page
     try {
-        //const localBusinesses = await businesses.getBusinessesBySearchTerm('coffee');
         const allBusinesses = await businesses.getAllBusinesses();
         res.render("homepage", {business: allBusinesses});
     } catch (e) {
         res.sendStatus(500);
     }
 });
+
+
+router.post('/search', async(req,res) => {
+        try {
+            const allBusinesses = await businesses.getBusinessesBySearchTerm(req.body.input);
+            res.send(allBusinesses);
+        } catch (e) {
+            res.sendStatus(500);
+        }
+});
+
 
 module.exports = router;

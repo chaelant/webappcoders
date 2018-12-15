@@ -128,9 +128,12 @@ async function main() {
                 let reviewCount = business.review_count;
                 reviewCount++;
                 await businesses.updateReviewCount(businessId, reviewCount);
-
             }
         }
+    }
+
+    for (let biz in allBusinesses) {
+        await businesses.updateAverageRating(allBusinesses[biz]._id);
     }
 
     await businesses.createIndex();

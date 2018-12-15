@@ -11,7 +11,9 @@
 <body>
     <nav class="navbar">
         <div class="topnav-left">
-            <!-- Place search bar here -->
+            <input type="text" id="input" onkeyup="searchFun()" placeholder="Search for Business Names..">
+            <ul id="businesses">
+            </ul>
         </div>
         <div class="topnav-right">
             <a href="/users/login"><button type="button">  Login  </button></a>
@@ -28,7 +30,9 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
+        <script src="/public/js/search.js"></script>
     <script src="/public/js/basic_jquery.js"></script>
+    </main>
 </body>
 </html>
 

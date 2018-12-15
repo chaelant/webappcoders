@@ -8,6 +8,7 @@ const constructorMethod = app => {
     app.use('/reviews', reviewRoutes);
     app.use('/users', userRoutes);
     app.use('/detail', detailRoutes);
+    app.post('/search', dbRoutes);
 
 
     app.use('*', (req, res) => {

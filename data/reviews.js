@@ -3,6 +3,7 @@
 
 const mongoCollection = require('../config/mongoCollections');
 const reviews = mongoCollection.reviews;
+const businessFunc = require('./businesses');
 const uuid = require('uuid/v4');
 
 let exportedMethods = {
@@ -75,8 +76,6 @@ let exportedMethods = {
 
     addReview(userid, title, text, rating, timecreated, businessId, imageurl) {
         return reviews().then(reviewCollection => {
-
-            const now = new Date();
 
             let newReview = {
                 _id: uuid(),

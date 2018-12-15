@@ -1,0 +1,47 @@
+<article class="new-post">
+  <div class="header">
+    <h2>Fill out this form to create a buisness</h2>
+    <p class="subheading">Make your buisness public on our website!</p>
+  </div>
+  <form action="/users/createBusiness" method="POST" class="new-post-form">
+    <input type="hidden" name="csrftok">
+    <div class="js-password-meter-container" data-component-bound="true">
+      <input id="name" name="name" placeholder="Buisness Name" required="required" type="text" value="">
+      <input id="phone" name="phone" placeholder="Phone number" required="required" type="text" value="">
+      <input id="cat" name="cat" placeholder="Categories" required="required" type="text" value="">
+      <input id="address" name="address" placeholder="Address" required="required" type="text" value="">
+      <input id="price" name="price" placeholder="Price $,$$,$$$" required="required" type="text" value="">
+      <input id="imageURL" name="image_url" placeholder="Image URL" required="required" type="text" value="">
+      <div class="js-password-meter-wrapper password-meter-wrapper u-hidden">
+
+        <div class="progress-bar-container--minimal">
+          <h4 class="progress-bar-text">
+          </h4>
+          <div class="progress-bar new js-progress-bar">
+            <div class="progress-bar_fill js-progress-bar_fill new" role="presentation" style="width: 0%"></div>
+          </div>
+        </div>
+        {{!-- <div class="js-password-meter-help-block help-block u-space-b2">Password must be at least 6 characters in
+          length</div>
+        <input type="hidden" class="js-password-meter-strength-result" name="result_password_strength_meter">
+      </div> --}}
+      <input id="signup_source" name="signup_source" type="hidden" value="default">
+    </div>
+    </div>
+
+   
+
+
+
+    <button id="signup-button" type="submit" value="Create a new buisness!" class="ybtn ybtn--primary ybtn--big disable-on-submit submit signup-button"><span>Create a new buisness!</span></button>
+  </form>
+  {{#if hasErrors}}
+  <ul class="error-list">
+    {{#each errors}}
+    <li>
+      {{this}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+</article>
